@@ -11,6 +11,7 @@ MIT Licence
 
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -63,6 +64,7 @@ plt.legend()
 plt.title("Expected Phase Shift vs Frequency for Smooth Waveguide")
 
 # Save
-plt.savefig("phase_shift_theoretical.png", dpi=300)
+os.makedirs("Plot", exist_ok=True)
+plt.savefig("Plot/phase_shift_theoretical.png", dpi=300)
 
 plt.show()
