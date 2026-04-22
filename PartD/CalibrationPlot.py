@@ -30,6 +30,14 @@ s21_phase = data[:, 9]   # PHASE3
 s12_mag = data[:, 5]     # LOGMAG2
 s12_phase = data[:, 6]   # PHASE2
 
+# Keep only data below 17.5 GHz
+mask = freq <= 17.0
+freq = freq[mask]
+s21_mag = s21_mag[mask]
+s21_phase = s21_phase[mask]
+s12_mag = s12_mag[mask]
+s12_phase = s12_phase[mask]
+
 # ---------------------------------------------------------------------------
 # Plot
 # ---------------------------------------------------------------------------
@@ -44,6 +52,9 @@ plt.ylabel("Magnitude (dB)")
 plt.grid(True, linestyle=":")
 plt.legend()
 
+plt.ylim(-4, 2)
+
+
 # Phase
 plt.subplot(2, 1, 2)
 plt.plot(freq, s21_phase, label="S21")
@@ -53,7 +64,9 @@ plt.ylabel("Phase (degrees)")
 plt.grid(True, linestyle=":")
 plt.legend()
 
+plt.ylim(-150, 10)
+
 plt.tight_layout()
 os.makedirs("Plot", exist_ok=True)
-plt.savefig("Plot/calibration_check.png", dpi=300)
+plt.savefig("Plot/calibration_check_to_17GHz.png", dpi=300)
 plt.show()
